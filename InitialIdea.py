@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 10
-runN = 100
+N = 5000
+runN = 10000
 epsilon = 1e-1
 initial_distribution = np.zeros(N) + 1./N
 steps = range(runN+1)
@@ -17,7 +17,7 @@ def FairShare(distribution, fraction_stolen=1e-2):
         distribution[j] -= amount_stolen
     return distribution
 
-def ProtectTheRich(distribution, fraction_stolen=1e-2):
+def ProtectTheRich(distribution, fraction_stolen=1e-1):
     """ Redistribute `distribution' with less stolen from the rich """
     for i in range(len(distribution)):
         j = np.random.randint(0, N)
@@ -48,5 +48,12 @@ poorest = distribution[:, j_poorest]
 ax2.plot(steps, richest)
 ax2.plot(steps, poorest)
 
+plt.show()
+
+
+final_distribution = distribution[-1]
+
+ax = plt.subplot(111)
+ax.hist(final_distribution, bins=100)
 plt.show()
 
