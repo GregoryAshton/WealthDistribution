@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-N = 100
-runN = 1000
+N = 10
+runN = 100
 epsilon = 1e-1
 initial_distribution = np.zeros(N) + 1./N
 steps = range(runN+1)
@@ -39,11 +39,10 @@ average = np.average(distribution, axis=1)
 std = np.std(distribution, axis=1)
 ax1.errorbar(steps, average, yerr=std)
 
-i_richest,j_richest = np.unravel_index(distribution.argmax(), 
-                                       distribution.shape)
+j_richest = np.argmax(np.average(distribution, axis=0))
 richest = distribution[:, j_richest]
-i_poorest,j_poorest = np.unravel_index(distribution.argmin(), 
-                                       distribution.shape)
+
+j_poorest = np.argmin(np.average(distribution, axis=0))
 poorest = distribution[:, j_poorest]
 
 ax2.plot(steps, richest)
